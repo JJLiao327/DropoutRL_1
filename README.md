@@ -33,7 +33,7 @@ Main external dependencies:
 pip install torch numpy
 ```
 
-Internal project dependencies (must be available under `project_root`):
+Internal project dependencies (must exist under `project_root`):
 
 - `SPARCS.graph.graph.Graph`
 - `SPARCS.tools.reader.readers.JSONLReader`
@@ -43,7 +43,7 @@ Internal project dependencies (must be available under `project_root`):
 - `datasets/aqua_dataset.py`
 - `datasets/mmlu_dataset.py`
 
-> ⚠️ If `GPTChat` requires API keys (e.g., OpenAI), configure them according to your implementation in `SPARCS/llm/gpt_chat.py`.
+> ⚠️ If `GPTChat` requires API keys or external LLM access (e.g., OpenAI), configure them in `SPARCS/llm/gpt_chat.py`.
 
 ---
 
@@ -51,36 +51,45 @@ Internal project dependencies (must be available under `project_root`):
 
 ```
 project_root/
-├─ scripts/
-│  └─ run_eval.py            # main evaluation script
 ├─ SPARCS/
-│  ├─ graph/
-│  ├─ llm/
-│  ├─ tools/
-│  └─ utils/
+├─ aqua/
 ├─ datasets/
-│  ├─ gsm8k/
-│  │  └─ test.jsonl
-│  ├─ gsm8k_dataset.py
-│  ├─ aqua_dataset.py
-│  └─ mmlu_dataset.py
-└─ result/
-   └─ <domain>/
-      └─ *.json
+├─ experiments/
+│  └─ run-sync-1.py          # main evaluation script (your entry point)
+├─ result/
+├─ rl/
+├─ test.py
+├─ utils_rl.py
+└─ README.md
 ```
 
-The script automatically adds `project_root` to `sys.path`, so it should be run from a subdirectory of the project root (e.g., `scripts/`).
+> Make sure to run scripts (e.g., `run-sync-1.py`) from a subdirectory like `experiments/`, as the root is automatically added to `sys.path`.
 
 ---
 
 ## Quick Start
 
-### 1. Fixed Communication Structure (Default)
+### 1. LLM-Generated Communication Structure (Your Example)
 
 ```bash
-python scripts/run_eval.py \
-  --domain gsm8k \
+python experiments/run-sync-1.py \
+  --dataset_json "aqua/test.jsonl" \
+  --domain "aqua" \
+  --agent_names Planner MathSolver \
+  --agent_nums 2 2 \
+  --decision_method FinalRefer \
+  --batch_size 1 \
+  --structure_generator llm \
+  --structure_llm_name qwen2_lora_sft \
+  --llm_name meta-llama/llama-3-8b-instruct
+```
+
+### 2. Fixed Communication Structure (Example)
+
+```bash
+python experiments/run-sync-1.py \
   --dataset_json datasets/gsm8k/test.jsonl \
+  --domain gsm8k \
   --structure_generator fixed \
   --fixed_mode FullConnected \
   --agent_names MathSolver \
@@ -90,46 +99,26 @@ python scripts/run_eval.py \
   --batch_size 4
 ```
 
-### 2. LLM-Generated Communication Structure
-
-```bash
-python scripts/run_eval.py \
-  --domain gsm8k \
-  --dataset_json datasets/gsm8k/test.jsonl \
-  --structure_generator llm \
-  --structure_llm_name gpt-4o-mini \
-  --agent_names MathSolver \
-  --agent_nums 4 \
-  --llm_name gpt-3.5-turbo \
-  --num_rounds 1 \
-  --batch_size 4
-```
-
-- `--structure_llm_name`: model used to generate the communication graph
-- `--llm_name`: model used by agents during reasoning
-
-If `--structure_llm_name` is not provided, it defaults to `--llm_name`.
-
 ---
 
 ## Command-Line Arguments
 
 | Argument | Type | Default | Description |
 |---|---|---|---|
-| `--dataset_json` | str | `datasets/gsm8k/test.jsonl` | Path to input dataset (JSONL) |
-| `--result_file` | str | None | Output file path (auto-generated if not set) |
-| `--domain` | str | `gsm8k` | Dataset domain: `gsm8k`, `aqua`, or `mmlu` |
-| `--llm_name` | str | `gpt-3.5-turbo` | LLM used for agent reasoning |
-| `--structure_llm_name` | str | None | LLM used for structure generation |
+| `--dataset_json` | str | - | Path to dataset (JSONL format) |
+| `--result_file` | str | None | Optional output file path |
+| `--domain` | str | - | Dataset domain: `gsm8k`, `aqua`, or `mmlu` |
+| `--llm_name` | str | `gpt-3.5-turbo` | Model used by reasoning agents |
+| `--structure_llm_name` | str | None | Model used to generate communication graph |
 | `--agent_names` | list[str] | `['MathSolver']` | Agent role names |
 | `--agent_nums` | list[int] | `[4]` | Number of agents per role |
-| `--decision_method` | str | `FinalRefer` | Decision aggregation method |
-| `--num_rounds` | int | 1 | Number of interaction rounds |
+| `--decision_method` | str | `FinalRefer` | Aggregation strategy |
+| `--num_rounds` | int | 1 | Number of communication rounds |
 | `--structure_generator` | str | `fixed` | `fixed` or `llm` |
-| `--fixed_mode` | str | `FullConnected` | Fixed graph topology |
+| `--fixed_mode` | str | `FullConnected` | Predefined topology |
 | `--batch_size` | int | 4 | Save results every N samples |
 
-> ⚠️ `agent_names` and `agent_nums` must have the same length.
+> ⚠️ `agent_names` and `agent_nums` must match in length.
 
 ---
 
@@ -137,67 +126,54 @@ If `--structure_llm_name` is not provided, it defaults to `--llm_name`.
 
 Supported `--fixed_mode` options:
 
-- `FullConnected` – fully connected graph (default)
-- `Chain` – linear chain: 0 → 1 → 2 → ... → N-1
-- `Star` – star topology: 0 → all others
-- `Layered` – first half of agents connect to second half
-- `Random` – random directed edges (no self-loops)
-- `DirectAnswer` / `Debate` – no inter-agent communication
+- `FullConnected` – fully connected (default)
+- `Chain` – linear: 0 → 1 → ... → N-1
+- `Star` – one-to-all (0 → all)
+- `Layered` – layered structure
+- `Random` – random DAG
+- `DirectAnswer` / `Debate` – no communication
 
 ---
 
-## LLM-Generated Structures (`structure_generator=llm`)
+## LLM-Generated Structures
 
-When enabled:
+If `--structure_generator` is set to `llm`, the script uses an LLM to dynamically generate a DAG structure for agents:
 
-- The script sends the task description and agent list to an LLM
-- The LLM returns a JSON object specifying:
-  - Selected agent indices
-  - A communication matrix (DAG)
-- The matrix is expanded into a full `N × N` adjacency matrix
+- Input: task description + agent list
+- Output: communication matrix (no self-loops, must be DAG)
+- Constraints:
+  - One final output node (sink)
+  - Evaluation-only agents (like FinalRefer) cannot be final node
 
-### Constraints enforced in the prompt
-
-- The communication graph must be a **Directed Acyclic Graph (DAG)**
-- No self-loops
-- A clear final agent (sink node) must exist
-- Evaluation-only agents (e.g., `FinalRefer`, `Checker`) must not be used as final output nodes
-
-If structure generation fails, the script automatically falls back to the previous valid structure.
+If structure generation fails, the last valid structure is reused.
 
 ---
 
 ## Output Format
 
-Results are saved as a JSON list. Each entry has the following structure:
+Each sample is saved in a JSON object like:
 
 ```json
 {
   "Task_ID": 0,
-  "Structure_Generator": "fixed",
+  "Structure_Generator": "llm",
   "Question": "...",
   "True Answer": "...",
   "Response": "...",
   "Predicted Answer": "...",
   "Solved": true,
-  "Overall Accuracy": "0.7500"
+  "Overall Accuracy": "0.8000"
 }
 ```
 
-- `Overall Accuracy` is the cumulative accuracy up to the current sample
-- Results are written to disk every `batch_size` samples
-
 ---
 
-## Notes & Tips
+## Tips
 
-- For long runs, frequent saving helps prevent data loss if the process is interrupted
-- Ensure dataset preprocessing functions (`*_data_process`) match your JSONL schema
-- For `mmlu`, each record must include at least:
-  - `task`
-  - `answer`
-
----
+- Frequently save results (`--batch_size=1` is safest for debugging)
+- Check that your dataset (`test.jsonl`) matches the required format
+- Ensure that custom models like `qwen2_lora_sft` are loadable inside the codebase or handled by the inference module
+- To debug structure generation or agent reasoning, inspect intermediate logs or insert print statements in `SPARCS/llm/gpt_chat.py`
 
 ## License
 
