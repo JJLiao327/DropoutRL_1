@@ -1,0 +1,44 @@
+[
+    {
+        "Iteration": 1,
+        "Batch": 1,
+        "Record_Index": 0,
+        "Structure_Generator": "llm",
+        "Question": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?",
+        "True Answer": "18",
+        "Response": "Let's break down the problem and calculate step by step based on the hints provided.\n\nJanet's ducks lay 16 eggs per day. \n\nShe eats three for breakfast every morning and bakes muffins for her friends every day with four.\n\nTherefore, she uses 3+4 = 7 eggs daily for breakfast and muffins.\n\nThe remaining eggs for sale per day are 16 - 7 = 9 eggs.\n\nShe sells the remainder at the farmers' market daily for $2 per fresh duck egg.\n\nSo, the amount she makes every day at the farmers' market is 9 * $2 = $18.\n\nSo, Janet makes $18 every day at the farmers' market.\n\nThe answer is $18",
+        "Predicted Answer": "18",
+        "Solved": true,
+        "Reward (RL)": "N/A",
+        "Iter Accuracy": "1.0000",
+        "Overall Accuracy": "1.0000"
+    },
+    {
+        "Iteration": 1,
+        "Batch": 2,
+        "Record_Index": 0,
+        "Structure_Generator": "llm",
+        "Question": "A robe takes 2 bolts of blue fiber and half that much white fiber.  How many bolts in total does it take?",
+        "True Answer": "3",
+        "Response": "We know from the given hint that the answer is near to a certain number. Let's think step by step to find the answer.\n\nLet's denote the number of bolts of blue fiber needed as B. Given that it takes half as much white fiber as blue fiber, the number of bolts of white fiber needed would be 0.5 * B.\n\nTherefore, the total number of bolts needed for the robe would be the sum of the bolts of blue and white fiber, which is: B + 0.5B = 1.5B.\n\nSince they don't provide a specific value for B in the hint, we can proceed by calculating in general terms:\n\n1.5B = Total number of bolts needed for the robe.\n\nTherefore, the answer would be 1.5 times the number of bolts of blue fiber needed.\n\nThe answer is 1.5",
+        "Predicted Answer": "5",
+        "Solved": false,
+        "Reward (RL)": "N/A",
+        "Iter Accuracy": "0.5000",
+        "Overall Accuracy": "0.5000"
+    },
+    {
+        "Iteration": 1,
+        "Batch": 3,
+        "Record_Index": 0,
+        "Structure_Generator": "llm",
+        "Question": "Josh decides to try flipping a house.  He buys a house for $80,000 and then puts in $50,000 in repairs.  This increased the value of the house by 150%.  How much profit did he make?",
+        "True Answer": "70000",
+        "Response": "1. 计算Josh购买并修复房屋的总成本：\n   - 计算购买房屋的总花费：$80,000\n   - 计算修复房屋的总花费：$50,000\n   - 计算总成本：购买成本 + 修复成本\n\n2. 计算修复后房屋的价值：\n   - 计算修复后房屋的增值百分比：150%\n   - 计算修复后房屋的价值\n\n3. 计算Josh出售房屋后的利润：\n   - 出售价格 = 修复后房屋的价值\n   - 利润 = 出售价格 - 总成本\n\n4. 汇总计算结果，得出Josh成功翻新房屋后的利润。",
+        "Predicted Answer": "4",
+        "Solved": false,
+        "Reward (RL)": "N/A",
+        "Iter Accuracy": "0.3333",
+        "Overall Accuracy": "0.3333"
+    }
+]

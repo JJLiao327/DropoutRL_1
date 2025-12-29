@@ -1,0 +1,12 @@
+[
+  {
+    "Task_ID": 0,
+    "Structure_Generator": "llm",
+    "Question": "Find the degree for the given field extension Q(sqrt(2), sqrt(3), sqrt(18)) over Q.\nOption A: 0\nOption B: 4\nOption C: 2\nOption D: 6",
+    "True Answer": "B",
+    "Response": "<Input Processing Error>",
+    "Predicted Answer": "",
+    "Solved": false,
+    "Overall Accuracy": "0.0000"
+  }
+]

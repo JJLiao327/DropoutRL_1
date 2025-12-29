@@ -1,0 +1,32 @@
+[
+  {
+    "Task_ID": 0,
+    "Structure_Generator": "llm",
+    "Question": "Find the degree for the given field extension Q(sqrt(2), sqrt(3), sqrt(18)) over Q.\nOption A: 0\nOption B: 4\nOption C: 2\nOption D: 6",
+    "True Answer": "B",
+    "Response": "<Input Processing Error>",
+    "Predicted Answer": "",
+    "Solved": false,
+    "Overall Accuracy": "0.0000"
+  },
+  {
+    "Task_ID": 1,
+    "Structure_Generator": "llm",
+    "Question": "Let p = (1, 2, 5, 4)(2, 3) in S_5 . Find the index of <p> in S_5.\nOption A: 8\nOption B: 2\nOption C: 24\nOption D: 120",
+    "True Answer": "C",
+    "Response": "<Input Processing Error>",
+    "Predicted Answer": "",
+    "Solved": false,
+    "Overall Accuracy": "0.0000"
+  },
+  {
+    "Task_ID": 2,
+    "Structure_Generator": "llm",
+    "Question": "Find all zeros in the indicated finite field of the given polynomial with coefficients in that field. x^5 + 3x^3 + x^2 + 2x in Z_5\nOption A: 0\nOption B: 1\nOption C: 0,1\nOption D: 0,4",
+    "True Answer": "D",
+    "Response": "<Input Processing Error>",
+    "Predicted Answer": "",
+    "Solved": false,
+    "Overall Accuracy": "0.0000"
+  }
+]

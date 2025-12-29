@@ -1,0 +1,28 @@
+[
+    {
+        "Iteration": 1,
+        "Batch": 1,
+        "Record_Index": 0,
+        "Question": "Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?",
+        "True Answer": "72",
+        "Response": "## Step 1\nTo find the profit from Josh's deal, we need to calculate the increase in value of the house, which is $130,000, and then subtract the total investment of $80,000.\n\n## Step 2\n Agents 623T, 8GTW, and 7R9w have all calculated that the increase is $150,000. However, they used different methods: $130,000 based on the total investment (purchase price + repair costs), and $195,000 using the increased value from the initial purchase price. Considering the most common interpretation in real estate valuation practice, we should choose the latter.\n\n\n## Step 3\nBased on the most common interpretation of real estate valuation, the profit should be calculated based on the increased value from the initial purchase price, which is $150,000. The final answer is $150,000.\n\nThe final answer is 150000",
+        "Predicted Answer": "150000",
+        "Solved": false,
+        "Reward (RL)": "-0.0171",
+        "Iter Accuracy": "0.0000",
+        "Overall Accuracy": "0.0000"
+    },
+    {
+        "Iteration": 1,
+        "Batch": 2,
+        "Record_Index": 0,
+        "Question": "Weng earns $12 an hour for babysitting. Yesterday, she just did 50 minutes of babysitting. How much did she earn?",
+        "True Answer": "10",
+        "Response": "Let's analyze the problems step by step:\n\n1. Josh decides to try flipping a house. He buys a house for $80,000 and then puts in $50,000 in repairs. This increased the value of the house by 150%.\n\nThe base value is calculated by adding the initial purchase price and the repair costs:\n$80,000 (purchase price) + $50,000 (repair costs) = $130,000\n\nThe new value is then calculated by increasing the base value by 150%:\n$130,000 * 1.5 = $195,000\n\nSo, Josh made a profit of $195,000 - $80,000 = $115,000.\n\n2. A water tank can hold 1200 liters of water. The water level is currently at 300 liters. How much water is left in the tank?\n\nThe initial amount of water is:\n$1200 (tank capacity)\n\nThe current water level is:\n300 liters\n\nSo, the amount of water left in the tank is:\n$1200 - 300 = 900 liters\n\n3. A store has 2500 fish in the tank. If 1000 fish are removed from the tank, how many fish are left?\n\nThe initial number of fish is:\n2500\n\nAfter removing 1000 fish, the remaining number of fish is:\n2500 - 1000 = 1500\n\n4. A bank account has a balance of $5000 initially. After depositing $800, the balance increases to $10000. How much was deposited?\n\nThe initial balance is:\n$5000\n\nThe new balance is:\n$10000\n\nThe amount deposited is:\n$10000 - $5000 = $5000\n\n5. A 300g coffee is put into a container filled with water. The container can hold 1000g of water. How much coffee can be added to the container?\n\nThe initial amount of coffee is:\n300g\n\nThe initial amount of water is:\n$1000 (can hold)\n\nThe amount of water left is:\n$1000 - 300 = 700g\n\nThe amount of coffee that can be added is:\n$700g / 300g = 2.3333\n\n6. A fruit basket contains 5 apples and 3 oranges. If 2 more apples and 2 more oranges are added, how many fruits are in the basket now?\n\nThe initial number of fruits is:\n8\n\nAfter adding 2 more apples, the total number of fruits is:\n8 + 2 = 10\n\nAfter adding 2 more oranges, the total number of fruits is:\n10 + 2 = 12\n\nThe answer is 12.",
+        "Predicted Answer": "12",
+        "Solved": false,
+        "Reward (RL)": "-0.0171",
+        "Iter Accuracy": "0.0000",
+        "Overall Accuracy": "0.0000"
+    }
+]

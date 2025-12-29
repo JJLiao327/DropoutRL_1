@@ -1,0 +1,54 @@
+[
+    {
+        "Iteration": 1,
+        "Batch": 1,
+        "Record_Index": 0,
+        "Question": "Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?",
+        "True Answer": "72",
+        "Response": "<Execution Error>",
+        "Predicted Answer": "0",
+        "Solved": false,
+        "Reward (RL)": "-0.0167",
+        "Iter Accuracy": "0.0000",
+        "Overall Accuracy": "0.0000"
+    },
+    {
+        "Iteration": 1,
+        "Batch": 1,
+        "Record_Index": 1,
+        "Question": "Weng earns $12 an hour for babysitting. Yesterday, she just did 50 minutes of babysitting. How much did she earn?",
+        "True Answer": "10",
+        "Response": "<Execution Error>",
+        "Predicted Answer": "0",
+        "Solved": false,
+        "Reward (RL)": "-0.0023",
+        "Iter Accuracy": "0.0000",
+        "Overall Accuracy": "0.0000"
+    },
+    {
+        "Iteration": 1,
+        "Batch": 1,
+        "Record_Index": 2,
+        "Question": "Betty is saving money for a new wallet which costs $100. Betty has only half of the money she needs. Her parents decided to give her $15 for that purpose, and her grandparents twice as much as her parents. How much more money does Betty need to buy the wallet?",
+        "True Answer": "5",
+        "Response": "<Execution Error>",
+        "Predicted Answer": "0",
+        "Solved": false,
+        "Reward (RL)": "-0.0356",
+        "Iter Accuracy": "0.0000",
+        "Overall Accuracy": "0.0000"
+    },
+    {
+        "Iteration": 1,
+        "Batch": 1,
+        "Record_Index": 3,
+        "Question": "Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?",
+        "True Answer": "42",
+        "Response": "<Execution Error>",
+        "Predicted Answer": "0",
+        "Solved": false,
+        "Reward (RL)": "-0.0256",
+        "Iter Accuracy": "0.0000",
+        "Overall Accuracy": "0.0000"
+    }
+]

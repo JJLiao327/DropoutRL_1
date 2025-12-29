@@ -1,0 +1,7 @@
+# PPO 超参数配置
+
+lr: 0.0003             # 学习率
+gamma: 0.99            # 折扣因子
+clip_param: 0.2        # PPO剪切范围
+value_loss_coef: 0.5   # 价值网络损失权重
+entropy_coef: 0.01     # 策略熵正则化权重

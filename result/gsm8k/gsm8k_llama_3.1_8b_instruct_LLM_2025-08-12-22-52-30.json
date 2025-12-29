@@ -1,0 +1,16 @@
+[
+    {
+        "Iteration": 1,
+        "Batch": 1,
+        "Record_Index": 0,
+        "Structure_Generator": "llm",
+        "Question": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?",
+        "True Answer": "18",
+        "Response": "<No Answer from Decision Node>",
+        "Predicted Answer": "0",
+        "Solved": false,
+        "Reward (RL)": "N/A",
+        "Iter Accuracy": "0.0000",
+        "Overall Accuracy": "0.0000"
+    }
+]
